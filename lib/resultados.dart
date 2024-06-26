@@ -101,10 +101,10 @@ class _SliderPState extends State<SliderP> {
                     autoPlayAnimationDuration: const Duration(seconds: 2),
                     enlargeCenterPage: true,
                     viewportFraction: isMobile
-                        ? 0.8
+                        ? 0.9
                         : isTablet
                             ? 0.4
-                            : 0.2, // Exibe duas imagens ao mesmo tempo
+                            : 0.25, // Exibe duas imagens ao mesmo tempo
                     onPageChanged: (index, reason) =>
                         setState(() => activeIndex = index))),
             const SizedBox(height: 12),

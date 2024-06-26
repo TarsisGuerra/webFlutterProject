@@ -6,9 +6,17 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 600;
+    final isTablet = width >= 600 && width < 1200;
     return Container(
       color: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(
+          horizontal: isMobile
+              ? 20
+              : isTablet
+                  ? 100
+                  : 150),
       height: 100,
       width: double.infinity,
       child: LayoutBuilder(
