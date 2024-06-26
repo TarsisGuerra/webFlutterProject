@@ -1,17 +1,20 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:pedro_site/useful/paleta.dart'; // Make sure to import your palette file
+import 'package:pedro_site/useful/paleta.dart'; // Importe sua paleta de cores
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Depoimentos extends StatelessWidget {
   const Depoimentos({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.orange,
+    return const SizedBox(
+      //color: Colors.orange,
       height: 600,
-      child: const Column(
+      child: Column(
         children: [
-          TestimonialBody(),
+          Expanded(child: TestimonialBody()),
         ],
       ),
     );
@@ -40,7 +43,6 @@ class TestimonialBody extends StatelessWidget {
         width: double.infinity,
         height: 200,
         child: Stack(
-          alignment: Alignment.centerLeft,
           clipBehavior: Clip.none,
           children: [
             Positioned(
@@ -56,19 +58,19 @@ class TestimonialBody extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.height * 0.15,
                     decoration: const BoxDecoration(
-                        color: PaletaCores.marrom,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(360),
-                            topRight: Radius.circular(360),
-                            bottomRight: Radius.circular(360))),
+                      color: PaletaCores.marrom,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(360),
+                        topRight: Radius.circular(360),
+                        bottomRight: Radius.circular(360),
+                      ),
+                    ),
                     child: const Padding(
                       padding: EdgeInsets.all(20),
                       child: Image(image: AssetImage('assets/images/negi.png')),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 0.15,
@@ -100,6 +102,15 @@ class TestimonialBody extends StatelessWidget {
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 1,
+                    height: MediaQuery.of(context).size.height * 1.8,
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 900),
+                      child: TestimonialPage(),
                     ),
                   ),
                 ],
@@ -134,6 +145,119 @@ class TestimonialBody extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class TestimonialPage extends StatefulWidget {
+  const TestimonialPage({super.key});
+
+  @override
+  _TestimonialPageState createState() => _TestimonialPageState();
+}
+
+class _TestimonialPageState extends State<TestimonialPage> {
+  late final PageController _pageController;
+  final List<String> testimonials = [
+    'Continuo seguindo suas orientações e dieta, hoje me pesei e me surpreendi, estou com 55,30kg \n- Gabriela S.',
+    'Boa noite, Pedro! \n Sim, tudo certinho! \n Tô feliz com minha dieta. \n Obrigada de verdade! 🥰 \n- Graziele',
+    'Eu prometi que não me pesaria até o retorno kkkk, mas me pesei semana passada e como tinha ganho 2kg no início da dieta, vi que acabei perdendo os dois kg e pouquinho \n- Ana',
+    'Estou amando. Já estou vendo diferença. Tô quase com 67 kg. \n- Bárbara',
+    'Já vi uma diferença boa. Senti que melhorou a celulite, as roupas já estão mais folgadas 🙌🏻👏🏻 \n- Millana M.',
+    'A melhor dieta que já recebi! 🙌🏻👏🏻 \n- Marcos P.',
+    'Fala Pedrão! Bom dia! Passando só para dar o feedback. Já foram 2kg nessas duas semanas, hein?! Tá dando certo! 💪🏼 \n- Sérgio H.',
+  ];
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+    _startAutomaticPageChange();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _startAutomaticPageChange() {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      if (_currentPage < testimonials.length - 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+      if (_pageController.hasClients) {
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          width: 544,
+          height: 160, // Altura desejada para o PageView
+          child: PageView.builder(
+            controller: _pageController,
+            itemCount: testimonials.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  elevation: 1,
+                  color: PaletaCores.marrom,
+                  child: SizedBox(
+                    height: 300, // Altura do Card dentro do PageView
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          testimonials[index],
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Poppins',
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+            onPageChanged: (index) {
+              setState(() {
+                _currentPage = index;
+              });
+            },
+          ),
+        ),
+        const SizedBox(height: 12),
+        AnimatedSmoothIndicator(
+          activeIndex: _currentPage,
+          count: testimonials.length,
+          effect: const WormEffect(
+            dotHeight: 8,
+            dotWidth: 8,
+            activeDotColor: PaletaCores.marrom,
+            dotColor: Colors.grey,
+          ),
+        ),
+      ],
     );
   }
 }

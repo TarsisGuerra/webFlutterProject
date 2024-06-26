@@ -118,7 +118,7 @@ class _SliderPState extends State<SliderP> {
   Widget buildIndicator() => AnimatedSmoothIndicator(
         onDotClicked: animateToSlide,
         effect: const ExpandingDotsEffect(
-            dotWidth: 15, activeDotColor: PaletaCores.marrom),
+            dotWidth: 10, dotHeight: 10, activeDotColor: PaletaCores.marrom),
         activeIndex: activeIndex,
         count: urlImages.length,
       );
