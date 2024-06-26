@@ -9,7 +9,8 @@ class Planos extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 800,
-      decoration: const BoxDecoration(color: Color(0xFF7D6C60)),
+      decoration:
+          const BoxDecoration(color: Color.fromARGB(255, 187, 166, 150)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

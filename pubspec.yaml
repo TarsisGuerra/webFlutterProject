@@ -59,6 +59,7 @@ flutter:
 
   assets:
     - 'assets/images/logoFim.png'
+    - 'assets/images/contato.png'
     - 'assets/images/imagem.png'
     - 'assets/images/depoimento.png'
     - 'assets/images/depo.png'
