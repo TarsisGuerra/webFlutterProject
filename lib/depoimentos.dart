@@ -9,10 +9,10 @@ class Depoimentos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      //color: Colors.orange,
-      height: 600,
-      child: Column(
+    return Container(
+      color: Colors.white,
+      height: 650,
+      child: const Column(
         children: [
           Expanded(child: TestimonialBody()),
         ],
@@ -109,7 +109,7 @@ class TestimonialBody extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 1,
                     height: MediaQuery.of(context).size.height * 1.8,
                     child: const Padding(
-                      padding: EdgeInsets.only(left: 900),
+                      padding: EdgeInsets.only(left: 950),
                       child: TestimonialPage(),
                     ),
                   ),
@@ -126,7 +126,7 @@ class TestimonialBody extends StatelessWidget {
                   ? 300
                   : isTablet
                       ? 550
-                      : 750,
+                      : 800,
               width: isMobile
                   ? MediaQuery.of(context).size.width * 0.2
                   : isTablet
@@ -204,8 +204,8 @@ class _TestimonialPageState extends State<TestimonialPage> {
     return Column(
       children: [
         SizedBox(
-          width: 544,
-          height: 160, // Altura desejada para o PageView
+          width: 550,
+          height: 200, // Altura desejada para o PageView
           child: PageView.builder(
             controller: _pageController,
             itemCount: testimonials.length,

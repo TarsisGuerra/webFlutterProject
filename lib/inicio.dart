@@ -311,7 +311,7 @@ Widget informativos(BuildContext context) {
           ? 3 / 2
           : isTablet
               ? 2.9 / 2
-              : 2.9 / 2,
+              : 3.2 / 2,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
     ),
