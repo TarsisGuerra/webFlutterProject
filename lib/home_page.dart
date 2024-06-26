@@ -13,18 +13,18 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Header(),
-            Initial(),
+            const Header(),
+            const Initial(),
             Resultados(),
-            Depoimentos(),
-            Planos(),
-            Contato(),
-            Atendimentos(),
-            Foot()
+            const Depoimentos(),
+            const Planos(),
+            const Contato(),
+            const Atendimentos(),
+            const Foot()
           ],
         ),
       ),
