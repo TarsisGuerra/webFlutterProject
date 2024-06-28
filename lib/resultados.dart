@@ -15,9 +15,7 @@ class Resultados extends StatelessWidget {
       child: Column(
         children: [
           cabecalho(context),
-          const SizedBox(
-            height: 25,
-          ),
+          const SizedBox(height: 25),
           const Expanded(child: SliderP()),
         ],
       ),
@@ -28,8 +26,6 @@ class Resultados extends StatelessWidget {
 Widget cabecalho(BuildContext context) {
   final width = MediaQuery.of(context).size.width;
   final isMobile = width < 600;
-  final isTablet = width >= 600 && width < 1200;
-
   return Padding(
     padding: isMobile
         ? const EdgeInsets.only(top: 40, left: 20)
@@ -39,18 +35,22 @@ Widget cabecalho(BuildContext context) {
         Text(
           'Resultados',
           style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 36,
-              fontWeight: FontWeight.w500,
-              color: PaletaCores.marrom),
+            fontFamily: 'Poppins',
+            fontSize: 36,
+            fontWeight: FontWeight.w500,
+            color: PaletaCores.marrom,
+          ),
         ),
+        SizedBox(height: 10),
         Text(
           'Resultados reais com uma dieta personalizada: sua saúde e bem-estar em primeiro lugar!',
           style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 18,
-              fontWeight: FontWeight.normal,
-              color: PaletaCores.marrom),
+            fontFamily: 'Poppins',
+            fontSize: 18,
+            fontWeight: FontWeight.normal,
+            color: PaletaCores.marrom,
+          ),
+          textAlign: TextAlign.center,
         ),
       ],
     ),
@@ -58,7 +58,9 @@ Widget cabecalho(BuildContext context) {
 }
 
 class SliderP extends StatefulWidget {
-  const SliderP({super.key});
+  const SliderP({
+    super.key,
+  });
 
   @override
   State<SliderP> createState() => _SliderPState();
@@ -66,8 +68,8 @@ class SliderP extends StatefulWidget {
 
 class _SliderPState extends State<SliderP> {
   int activeIndex = 0;
-  final controller = CarouselController();
-  final urlImages = [
+  final CarouselController _controller = CarouselController();
+  final List<String> urlImages = [
     'assets/images/imagesResult/1.png',
     'assets/images/imagesResult/2.png',
     'assets/images/imagesResult/3.png',
@@ -80,55 +82,45 @@ class _SliderPState extends State<SliderP> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final isMobile = width < 600;
-    final isTablet = width >= 600 && width < 1200;
-    return Container(
-      //color: const Color.fromARGB(255, 40, 40, 35),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CarouselSlider.builder(
-                carouselController: controller,
-                itemCount: urlImages.length,
-                itemBuilder: (context, index, realIndex) {
-                  final urlImage = urlImages[index];
-                  return buildImage(urlImage, index);
-                },
-                options: CarouselOptions(
-                    height: 400,
-                    autoPlay: true,
-                    enableInfiniteScroll: false,
-                    autoPlayAnimationDuration: const Duration(seconds: 2),
-                    enlargeCenterPage: true,
-                    viewportFraction: isMobile
-                        ? 0.9
-                        : isTablet
-                            ? 0.4
-                            : 0.25, // Exibe duas imagens ao mesmo tempo
-                    onPageChanged: (index, reason) =>
-                        setState(() => activeIndex = index))),
-            const SizedBox(height: 12),
-            buildIndicator()
-          ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CarouselSlider.builder(
+          carouselController: _controller,
+          itemCount: urlImages.length,
+          itemBuilder: (context, index, realIndex) {
+            final urlImage = urlImages[index];
+            return buildImage(urlImage);
+          },
+          options: CarouselOptions(
+            height: 400,
+            autoPlay: true,
+            autoPlayInterval: const Duration(seconds: 3),
+            enlargeCenterPage: true,
+            viewportFraction: isMobile ? 0.9 : 0.4,
+            onPageChanged: (index, reason) {
+              setState(() => activeIndex = index);
+            },
+          ),
         ),
-      ),
+        const SizedBox(height: 12),
+        AnimatedSmoothIndicator(
+          activeIndex: activeIndex,
+          count: urlImages.length,
+          effect: const ExpandingDotsEffect(
+            activeDotColor: PaletaCores.marrom,
+            dotColor: Colors.grey,
+            dotHeight: 8,
+            dotWidth: 8,
+          ),
+        ),
+      ],
     );
   }
 
-  Widget buildIndicator() => AnimatedSmoothIndicator(
-        onDotClicked: animateToSlide,
-        effect: const ExpandingDotsEffect(
-            dotWidth: 10, dotHeight: 10, activeDotColor: PaletaCores.marrom),
-        activeIndex: activeIndex,
-        count: urlImages.length,
-      );
-
-  void animateToSlide(int index) => controller.animateToPage(index);
-}
-
-Widget buildImage(String urlImage, int index) => Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 5), // Adiciona padding entre as imagens
+  Widget buildImage(String urlImage) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Image.asset(
@@ -137,3 +129,5 @@ Widget buildImage(String urlImage, int index) => Padding(
         ),
       ),
     );
+  }
+}

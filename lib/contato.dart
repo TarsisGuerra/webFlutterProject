@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pedro_site/useful/paleta.dart';
 
 class Contato extends StatelessWidget {
-  const Contato({super.key});
+  const Contato({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +14,9 @@ class Contato extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
-              child: corpo1(context)),
+            height: MediaQuery.of(context).size.height * 0.7,
+            child: corpo1(context),
+          ),
         ],
       ),
     );
@@ -34,33 +37,36 @@ Widget corpo1(BuildContext context) {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  left: isMobile
-                      ? 20
-                      : isTablet
-                          ? 100
-                          : 200),
+                left: isMobile
+                    ? 20
+                    : isTablet
+                        ? 100
+                        : 200,
+              ),
               child: Row(
                 children: [
                   Text(
                     'Chegou a ',
                     style: TextStyle(
-                        fontSize: isMobile
-                            ? 20
-                            : isTablet
-                                ? 26
-                                : 26,
-                        color: PaletaCores.marrom),
+                      fontSize: isMobile
+                          ? 20
+                          : isTablet
+                              ? 26
+                              : 26,
+                      color: PaletaCores.marrom,
+                    ),
                   ),
                   Text(
                     'sua vez de',
                     style: TextStyle(
-                        fontSize: isMobile
-                            ? 20
-                            : isTablet
-                                ? 26
-                                : 26,
-                        color: PaletaCores.marrom,
-                        fontWeight: FontWeight.w600),
+                      fontSize: isMobile
+                          ? 20
+                          : isTablet
+                              ? 26
+                              : 26,
+                      color: PaletaCores.marrom,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),
@@ -73,83 +79,95 @@ Widget corpo1(BuildContext context) {
               ),
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: isMobile
-                        ? 20
-                        : isTablet
-                            ? 100
-                            : 200),
+                  left: isMobile
+                      ? 20
+                      : isTablet
+                          ? 100
+                          : 200,
+                ),
                 child: FittedBox(
                   alignment: Alignment.centerLeft,
                   fit: BoxFit.scaleDown,
                   child: Text(
                     'EMAGRECER',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: isMobile
-                            ? 62
-                            : isTablet
-                                ? 92
-                                : 92,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w100),
+                      color: Colors.white,
+                      fontSize: isMobile
+                          ? 62
+                          : isTablet
+                              ? 92
+                              : 92,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w100,
+                    ),
                   ),
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                  left: isMobile
-                      ? 20
-                      : isTablet
-                          ? 100
-                          : 200),
+                left: isMobile
+                    ? 20
+                    : isTablet
+                        ? 100
+                        : 200,
+              ),
               child: Row(
                 children: [
                   Text(
                     'Entre em contato agora e ',
                     style: TextStyle(
-                        fontSize: isMobile
-                            ? 20
-                            : isTablet
-                                ? 26
-                                : 26,
-                        color: PaletaCores.marrom),
+                      fontSize: isMobile
+                          ? 20
+                          : isTablet
+                              ? 26
+                              : 26,
+                      color: PaletaCores.marrom,
+                    ),
                   ),
                   Text(
                     'inicie sua transformação.',
                     style: TextStyle(
-                        fontSize: isMobile
-                            ? 20
-                            : isTablet
-                                ? 26
-                                : 26,
-                        color: PaletaCores.marrom,
-                        fontWeight: FontWeight.w600),
+                      fontSize: isMobile
+                          ? 20
+                          : isTablet
+                              ? 26
+                              : 26,
+                      color: PaletaCores.marrom,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                  left: isMobile
-                      ? 20
-                      : isTablet
-                          ? 100
-                          : 200,
-                  top: 50),
+                left: isMobile
+                    ? 20
+                    : isTablet
+                        ? 100
+                        : 200,
+                top: 50,
+              ),
               child: Container(
                 padding: const EdgeInsets.only(
-                    left: 25, right: 25, top: 12, bottom: 12),
+                  left: 25,
+                  right: 25,
+                  top: 12,
+                  bottom: 12,
+                ),
                 decoration: BoxDecoration(
-                    color: PaletaCores.marrom,
-                    borderRadius: BorderRadius.circular(30)),
+                  color: PaletaCores.marrom,
+                  borderRadius: BorderRadius.circular(30),
+                ),
                 child: const Text(
                   'Comece agora!',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 16,
-                      fontFamily: 'Poppins'),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                  ),
                 ),
               ),
             ),
@@ -157,30 +175,31 @@ Widget corpo1(BuildContext context) {
         ),
       ),
       Positioned(
-          top: isMobile
-              ? 10
-              : isTablet
-                  ? 20
-                  : 40,
-          right: isMobile
-              ? 20
-              : isTablet
-                  ? 50
-                  : 200,
-          width: isMobile
-              ? MediaQuery.of(context).size.width * 0.2
-              : isTablet
-                  ? MediaQuery.of(context).size.width * 0.3
-                  : MediaQuery.of(context).size.width * 0.28,
-          child: const Column(
-            children: [
-              ClipOval(
-                child: Image(
-                  image: AssetImage('assets/images/contato.png'),
-                ),
+        top: isMobile
+            ? 10
+            : isTablet
+                ? 20
+                : 40,
+        right: isMobile
+            ? 20
+            : isTablet
+                ? 50
+                : 200,
+        width: isMobile
+            ? MediaQuery.of(context).size.width * 0.2
+            : isTablet
+                ? MediaQuery.of(context).size.width * 0.3
+                : MediaQuery.of(context).size.width * 0.28,
+        child: const Column(
+          children: [
+            ClipOval(
+              child: Image(
+                image: AssetImage('assets/images/contato.png'),
               ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     ],
   );
 }

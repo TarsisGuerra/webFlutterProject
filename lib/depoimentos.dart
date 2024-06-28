@@ -5,7 +5,9 @@ import 'package:pedro_site/useful/paleta.dart'; // Importe sua paleta de cores
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Depoimentos extends StatelessWidget {
-  const Depoimentos({super.key});
+  const Depoimentos({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,9 @@ class Depoimentos extends StatelessWidget {
 }
 
 class TestimonialBody extends StatelessWidget {
-  const TestimonialBody({super.key});
+  const TestimonialBody({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
