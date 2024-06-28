@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pedro_site/useful/paleta.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Foot extends StatelessWidget {
   const Foot({super.key});
@@ -52,11 +53,11 @@ Widget corpo1(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      buildMenuItem('Home', context),
-      buildMenuItem('Acompanhamento', context),
-      buildMenuItem('Resultados', context),
-      buildMenuItem('Depoimentos', context),
-      buildMenuItem('Planos', context),
+      buildMenuItem('Emagrecimento', context),
+      buildMenuItem('Reeducação alimentar', context),
+      buildMenuItem('Aumento de performance', context),
+      buildMenuItem('Redução de medidas', context),
+      buildMenuItem('Hipertrofia', context),
     ],
   );
 }
@@ -83,19 +84,31 @@ Widget corpo2() {
       decoration: const BoxDecoration(
           color: Color.fromARGB(255, 187, 166, 150),
           borderRadius: BorderRadius.all(Radius.circular(15))),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Card(icone: Icons.email_rounded, texto: 'pedrogois28@gmail.com'),
-          SizedBox(
+          const Card(
+              icone: Icons.email_rounded, texto: 'pedrogois28@gmail.com'),
+          const SizedBox(
             width: 16,
           ),
-          Card(icone: Icons.phone, texto: '(84) 98712-1596'),
-          SizedBox(
+          GestureDetector(
+              onTap: () async {
+                const url = 'http://wa.me/5584987121596';
+                // ignore: deprecated_member_use
+                if (await canLaunch(url)) {
+                  // ignore: deprecated_member_use
+                  await launch(url);
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+              child: const Card(icone: Icons.phone, texto: '(84) 98712-1596')),
+          const SizedBox(
             width: 16,
           ),
-          Card(icone: Icons.location_on, texto: 'Endereços'),
-          SizedBox(
+          const Card(icone: Icons.location_on, texto: 'Endereços'),
+          const SizedBox(
             width: 16,
           ),
         ],

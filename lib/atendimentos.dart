@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pedro_site/useful/paleta.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Atendimentos extends StatelessWidget {
   const Atendimentos({
@@ -112,16 +113,28 @@ Widget cards() {
                   color: PaletaCores.marrom,
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: const Padding(
-                  padding:
-                      EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
-                  child: Text(
-                    'Agendar',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                      fontFamily: 'Poppins',
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 24, right: 24, top: 8, bottom: 8),
+                  child: GestureDetector(
+                    onTap: () async {
+                      const url = 'http://wa.me/5584987121596';
+                      // ignore: deprecated_member_use
+                      if (await canLaunch(url)) {
+                        // ignore: deprecated_member_use
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: const Text(
+                      'Agendar',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontFamily: 'Poppins',
+                      ),
                     ),
                   ),
                 ),

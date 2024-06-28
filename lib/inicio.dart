@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pedro_site/useful/paleta.dart';
 import 'package:social_media_buttons/social_media_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Initial extends StatefulWidget {
   const Initial({super.key});
@@ -20,11 +21,9 @@ class _InitialState extends State<Initial> {
               height: MediaQuery.of(context).size.height * 0.7,
               child: corpo1(context)),
           Container(
-            child: Column(
+            child: const Column(
               children: [
-                corpo2(context),
-                const SizedBox(height: 40),
-                informativos(context),
+                SizedBox(height: 40),
               ],
             ),
           )
@@ -157,13 +156,25 @@ Widget corpo1(BuildContext context) {
                 decoration: BoxDecoration(
                     color: PaletaCores.marrom,
                     borderRadius: BorderRadius.circular(30)),
-                child: const Text(
-                  'Entre em Contato',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 16,
-                      fontFamily: 'Poppins'),
+                child: GestureDetector(
+                  onTap: () async {
+                    const url = 'http://wa.me/5584987121596';
+                    // ignore: deprecated_member_use
+                    if (await canLaunch(url)) {
+                      // ignore: deprecated_member_use
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  child: const Text(
+                    'Entre em Contato',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16,
+                        fontFamily: 'Poppins'),
+                  ),
                 ),
               ),
             ),
@@ -186,179 +197,60 @@ Widget corpo1(BuildContext context) {
               : isTablet
                   ? MediaQuery.of(context).size.width * 0.3
                   : MediaQuery.of(context).size.width * 0.28,
-          child: const Column(
+          child: Column(
             children: [
-              ClipOval(
+              const ClipOval(
                 child: Image(
                   image: AssetImage('assets/images/imagem.png'),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    SocialMediaIcons.instagram,
-                    color: PaletaCores.marrom,
+                  GestureDetector(
+                    onTap: () async {
+                      const url =
+                          'https://www.instagram.com/pedrogoisnutri?igsh=bXpzMXp5b25tamQw&utm_source=qr';
+                      // ignore: deprecated_member_use
+                      if (await canLaunch(url)) {
+                        // ignore: deprecated_member_use
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: const Icon(
+                      SocialMediaIcons.instagram,
+                      color: PaletaCores.marrom,
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   ),
-                  Icon(
-                    SocialMediaIcons.linkedin,
-                    color: PaletaCores.marrom,
+                  GestureDetector(
+                    onTap: () async {
+                      const url =
+                          'https://linktr.ee/nutripedrogois?fbclid=PAZXh0bgNhZW0CMTEAAaY4bXXHaJOmsTw5HgHIHD6pSy2iopRveUnly1KszhjBrsRZt0daGXZ8lkc_aem_AZFLjA4tfgEq3-2x2FKMlYag9Hd8NAqApKnbHqhgTfE4MxH35SaF6Evie7DqMjsgGsNJD-aRZ3hXflCS5z_d_sYM';
+                      // ignore: deprecated_member_use
+                      if (await canLaunch(url)) {
+                        // ignore: deprecated_member_use
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: const Icon(
+                      SocialMediaIcons.linkedin,
+                      color: PaletaCores.marrom,
+                    ),
                   )
                 ],
               )
             ],
           )),
     ],
-  );
-}
-
-Widget corpo2(BuildContext context) {
-  final width = MediaQuery.of(context).size.width;
-  final isMobile = width < 600;
-  final isTablet = width >= 600 && width < 1200;
-
-  return Padding(
-    padding: isMobile
-        ? const EdgeInsets.only(left: 20)
-        : const EdgeInsets.only(left: 20),
-    child: const Column(
-      children: [
-        Text(
-          'Acompanhamento Personalizado',
-          style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 36,
-              fontWeight: FontWeight.w500,
-              color: PaletaCores.marrom),
-        ),
-        Text(
-          'Todos os detalhes pensados para atingir seus objetivos.',
-          style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 18,
-              fontWeight: FontWeight.normal,
-              color: PaletaCores.marrom),
-        ),
-      ],
-    ),
-  );
-}
-
-Widget informativos(BuildContext context) {
-  final List<Map<String, dynamic>> items = [
-    {
-      "title": "Questionário Pré-consulta",
-      "description":
-          "Você receberá um e-mail para preencher algumas informações, antes da consulta.",
-      "icon": Icons.assignment
-    },
-    {
-      "title": "Consulta",
-      "description":
-          "O atendimento pode ser feito de forma presencial ou on-line, tendo uma duração média de 30-50min.",
-      "icon": Icons.people_alt
-    },
-    {
-      "title": "Dieta",
-      "description":
-          "O plano alimentar é elaborado na consulta para criar uma dieta flexível e agradável (de acordo com suas necessidades e objetivos), incluindo suplementação e exames bioquímicos.",
-      "icon": Icons.fastfood
-    },
-    {
-      "title": "Avaliação Antropométrica",
-      "description":
-          "Realizamos as medidas da composição física e faremos o comparativo mês a mês dos resultados.",
-      "icon": Icons.straighten
-    },
-    {
-      "title": "Suporte Pós-consulta",
-      "description":
-          "O paciente recebe suporte semanal para dar feedback, mantendo um ritmo constante de evolução e orientação.",
-      "icon": Icons.support_agent
-    },
-    {
-      "title": "Acesso ao App Exclusivo",
-      "description":
-          "O paciente acessa o app Dietbox com dieta, suplementação, lista de compras, materiais de nutrição e área para compartilhar refeições com o nutricionista.",
-      "icon": Icons.mobile_friendly
-    },
-  ];
-
-  final width = MediaQuery.of(context).size.width;
-  final isMobile = width < 600;
-  final isTablet = width >= 600 && width < 1200;
-
-  return GridView.builder(
-    padding: EdgeInsets.symmetric(
-        horizontal: isMobile
-            ? 20
-            : isTablet
-                ? 100
-                : 200),
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: isMobile
-          ? 1
-          : isTablet
-              ? 2
-              : 3,
-      childAspectRatio: isMobile
-          ? 3 / 2
-          : isTablet
-              ? 2.9 / 2
-              : 3.2 / 2,
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-    ),
-    itemCount: items.length,
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    itemBuilder: (context, index) {
-      return Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: PaletaCores.marrom),
-            borderRadius: BorderRadius.circular(10)),
-        child: Card(
-          color: Colors.white,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 25, left: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(items[index]['icon'], size: 40, color: PaletaCores.marrom),
-                const SizedBox(height: 10),
-                Text(
-                  items[index]['title']!,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  items[index]['description']!,
-                  style: TextStyle(
-                      fontSize: isMobile
-                          ? 16
-                          : isTablet
-                              ? 14
-                              : 14),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    },
   );
 }

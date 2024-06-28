@@ -97,7 +97,7 @@ class _SliderPState extends State<SliderP> {
             autoPlay: true,
             autoPlayInterval: const Duration(seconds: 3),
             enlargeCenterPage: true,
-            viewportFraction: isMobile ? 0.9 : 0.4,
+            viewportFraction: isMobile ? 0.9 : 0.3,
             onPageChanged: (index, reason) {
               setState(() => activeIndex = index);
             },

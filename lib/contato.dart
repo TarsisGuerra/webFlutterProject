@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pedro_site/useful/paleta.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Contato extends StatelessWidget {
   const Contato({
@@ -160,13 +161,25 @@ Widget corpo1(BuildContext context) {
                   color: PaletaCores.marrom,
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: const Text(
-                  'Comece agora!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
+                child: GestureDetector(
+                  onTap: () async {
+                    const url = 'http://wa.me/5584987121596';
+                    // ignore: deprecated_member_use
+                    if (await canLaunch(url)) {
+                      // ignore: deprecated_member_use
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  child: const Text(
+                    'Comece agora!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                    ),
                   ),
                 ),
               ),
