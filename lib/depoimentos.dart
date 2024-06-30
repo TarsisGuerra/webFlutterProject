@@ -11,12 +11,36 @@ class Depoimentos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 600;
+    final isTablet = width >= 600 && width < 1200;
     return Container(
       color: Colors.white,
       height: 650,
-      child: const Column(
+      child: Column(
         children: [
-          Expanded(child: TestimonialBody()),
+          Expanded(
+              child: isMobile
+                  ? const Column(
+                      children: [
+                        TestimonialBody(),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        TestimonialPage(),
+                      ],
+                    )
+                  : isTablet
+                      ? const Column(
+                          children: [
+                            TestimonialBody(),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            TestimonialPage(),
+                          ],
+                        )
+                      : const TestimonialBody()),
         ],
       ),
     );
@@ -39,7 +63,7 @@ class TestimonialBody extends StatelessWidget {
         right: isMobile
             ? 0
             : isTablet
-                ? 50
+                ? 0
                 : 200,
         top: 80,
       ),
@@ -51,16 +75,24 @@ class TestimonialBody extends StatelessWidget {
           children: [
             Positioned(
               right: isMobile
-                  ? 0
+                  ? 10
                   : isTablet
-                      ? 0
+                      ? 10
                       : 50,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.08,
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    width: isMobile
+                        ? MediaQuery.of(context).size.width * 0.25
+                        : isTablet
+                            ? MediaQuery.of(context).size.width * 0.15
+                            : MediaQuery.of(context).size.width * 0.08,
+                    height: isMobile
+                        ? MediaQuery.of(context).size.width * 0.25
+                        : isTablet
+                            ? MediaQuery.of(context).size.width * 0.15
+                            : MediaQuery.of(context).size.height * 0.15,
                     decoration: const BoxDecoration(
                       color: PaletaCores.marrom,
                       borderRadius: BorderRadius.only(
@@ -86,7 +118,7 @@ class TestimonialBody extends StatelessWidget {
                         right: isMobile
                             ? 20
                             : isTablet
-                                ? 50
+                                ? 20
                                 : 50,
                       ),
                       child: FittedBox(
@@ -97,7 +129,7 @@ class TestimonialBody extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isMobile
-                                ? 62
+                                ? 52
                                 : isTablet
                                     ? 92
                                     : 92,
@@ -113,9 +145,8 @@ class TestimonialBody extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 1,
                     height: MediaQuery.of(context).size.height * 1.8,
                     child: const Padding(
-                      padding: EdgeInsets.only(left: 950),
-                      child: TestimonialPage(),
-                    ),
+                        padding: EdgeInsets.only(left: 950),
+                        child: TestimonialPage()),
                   ),
                 ],
               ),
@@ -205,11 +236,23 @@ class _TestimonialPageState extends State<TestimonialPage> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 600;
+    final isTablet = width >= 600 && width < 1300;
+
     return Column(
       children: [
         SizedBox(
-          width: 550,
-          height: 200, // Altura desejada para o PageView
+          width: isMobile
+              ? width * 0.9
+              : isTablet
+                  ? width * 0.5
+                  : 550,
+          height: isMobile
+              ? 250
+              : isTablet
+                  ? 230
+                  : 200,
           child: PageView.builder(
             controller: _pageController,
             itemCount: testimonials.length,
@@ -223,7 +266,11 @@ class _TestimonialPageState extends State<TestimonialPage> {
                   elevation: 1,
                   color: PaletaCores.marrom,
                   child: SizedBox(
-                    height: 300, // Altura do Card dentro do PageView
+                    height: isMobile
+                        ? 150
+                        : isTablet
+                            ? 100
+                            : 200,
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),

@@ -96,7 +96,7 @@ Widget corpo1(BuildContext context) {
                       fontSize: isMobile
                           ? 62
                           : isTablet
-                              ? 92
+                              ? 62
                               : 92,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w100,
@@ -113,33 +113,61 @@ Widget corpo1(BuildContext context) {
                         ? 100
                         : 200,
               ),
-              child: Row(
-                children: [
-                  Text(
-                    'Entre em contato agora e ',
-                    style: TextStyle(
-                      fontSize: isMobile
-                          ? 20
-                          : isTablet
-                              ? 26
-                              : 26,
-                      color: PaletaCores.marrom,
+              child: isMobile
+                  ? Column(
+                      children: [
+                        Text(
+                          'Entre em contato agora e ',
+                          style: TextStyle(
+                            fontSize: isMobile
+                                ? 20
+                                : isTablet
+                                    ? 26
+                                    : 26,
+                            color: PaletaCores.marrom,
+                          ),
+                        ),
+                        Text(
+                          'inicie sua transformação.',
+                          style: TextStyle(
+                            fontSize: isMobile
+                                ? 20
+                                : isTablet
+                                    ? 22
+                                    : 26,
+                            color: PaletaCores.marrom,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      children: [
+                        Text(
+                          'Entre em contato agora e ',
+                          style: TextStyle(
+                            fontSize: isMobile
+                                ? 20
+                                : isTablet
+                                    ? 22
+                                    : 26,
+                            color: PaletaCores.marrom,
+                          ),
+                        ),
+                        Text(
+                          'inicie sua transformação.',
+                          style: TextStyle(
+                            fontSize: isMobile
+                                ? 20
+                                : isTablet
+                                    ? 22
+                                    : 26,
+                            color: PaletaCores.marrom,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Text(
-                    'inicie sua transformação.',
-                    style: TextStyle(
-                      fontSize: isMobile
-                          ? 20
-                          : isTablet
-                              ? 26
-                              : 26,
-                      color: PaletaCores.marrom,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
             ),
             Padding(
               padding: EdgeInsets.only(

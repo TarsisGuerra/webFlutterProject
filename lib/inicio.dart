@@ -13,12 +13,17 @@ class Initial extends StatefulWidget {
 class _InitialState extends State<Initial> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 600;
+    final isTablet = width >= 600 && width < 1200;
     return Container(
       color: Colors.white,
       child: Column(
         children: [
           SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: isMobile
+                  ? MediaQuery.of(context).size.height * 0.5
+                  : MediaQuery.of(context).size.height * 0.7,
               child: corpo1(context)),
           Container(
             child: const Column(
@@ -101,7 +106,7 @@ Widget corpo1(BuildContext context) {
                         fontSize: isMobile
                             ? 62
                             : isTablet
-                                ? 92
+                                ? 62
                                 : 92,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w100),

@@ -9,17 +9,25 @@ class Atendimentos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 600;
+    final isTablet = width >= 600 && width < 1300;
+
     return Container(
       color: Colors.white,
-      height: 600,
-      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+          horizontal: isMobile
+              ? 16
+              : isTablet
+                  ? 100
+                  : 300),
       child: Column(
         children: [
           cabecalho(),
           const SizedBox(
             height: 40,
           ),
-          cards()
+          cards(isMobile: isMobile),
         ],
       ),
     );
@@ -51,206 +59,166 @@ Widget cabecalho() {
   );
 }
 
-Widget cards() {
-  return Padding(
-    padding: const EdgeInsets.only(left: 300, right: 300),
-    child: Row(
+Widget cards({required bool isMobile}) {
+  return isMobile
+      ? Column(
+          children: [
+            atendimentoCard(
+              title: 'Online',
+              description1: 'Como?',
+              description2: 'Atendimento Remoto',
+              buttonText: 'Agendar',
+              url: 'http://wa.me/5584987121596',
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            atendimentoCard(
+              title: 'Presencial',
+              description1: 'Onde?',
+              description2: 'Ponta Negra Center',
+              description3: 'Rua da Palestina, 99.\n Ponta Negra/RN',
+            ),
+          ],
+        )
+      : Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: atendimentoCard(
+                title: 'Online',
+                description1: 'Como?',
+                description2: 'Atendimento Remoto',
+                buttonText: 'Agendar',
+                url: 'http://wa.me/5584987121596',
+              ),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            Expanded(
+              child: atendimentoCard(
+                title: 'Presencial',
+                description1: 'Onde?',
+                description2: 'Ponta Negra Center',
+                description3: 'Rua da Palestina, 99. \n Ponta Negra/RN',
+              ),
+            ),
+          ],
+        );
+}
+
+Widget atendimentoCard({
+  required String title,
+  required String description1,
+  required String description2,
+  String? description3,
+  String? buttonText,
+  String? url,
+}) {
+  return Container(
+    width: 450,
+    height: 429,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(15),
+      border: Border.all(color: PaletaCores.marrom),
+    ),
+    child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: 450,
-          height: 429,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: PaletaCores.marrom),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 32,
+            color: PaletaCores.marrom,
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Online',
-                style: TextStyle(
-                  fontSize: 32,
-                  color: PaletaCores.marrom,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-              const Text(
-                'Como?',
-                style: TextStyle(
-                  fontSize: 26,
-                  color: PaletaCores.marrom,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 187, 166, 150),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: const Padding(
-                  padding:
-                      EdgeInsets.only(top: 8, bottom: 8, left: 24, right: 24),
-                  child: Text(
-                    'Atendimento Remoto',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: PaletaCores.marrom,
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: PaletaCores.marrom,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 24, right: 24, top: 8, bottom: 8),
-                  child: GestureDetector(
-                    onTap: () async {
-                      const url = 'http://wa.me/5584987121596';
-                      // ignore: deprecated_member_use
-                      if (await canLaunch(url)) {
-                        // ignore: deprecated_member_use
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                    child: const Text(
-                      'Agendar',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
+        ),
+        Text(
+          description1,
+          style: const TextStyle(
+            fontSize: 26,
+            color: PaletaCores.marrom,
+            fontFamily: 'Poppins',
           ),
         ),
         const SizedBox(
-          width: 20,
+          height: 40,
         ),
         Container(
-          width: 450,
-          height: 429,
           decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 187, 166, 150),
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: PaletaCores.marrom),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Presencial',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 32,
-                  color: PaletaCores.marrom,
-                  fontWeight: FontWeight.w600,
-                ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+            child: Text(
+              description2,
+              style: const TextStyle(
+                fontSize: 22,
+                color: PaletaCores.marrom,
+                fontFamily: 'Poppins',
               ),
-              const Text(
-                'Onde?',
-                style: TextStyle(
-                  fontSize: 26,
-                  color: PaletaCores.marrom,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 187, 166, 150),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: const Padding(
-                  padding:
-                      EdgeInsets.only(top: 8, bottom: 8, left: 24, right: 24),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Ponta Negra Center',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: PaletaCores.marrom,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      Text(
-                        'Rua da Palestina, 99. Ponta Negra/RN',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: PaletaCores.marrom,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 187, 166, 150),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: const Padding(
-                  padding:
-                      EdgeInsets.only(top: 8, bottom: 8, left: 24, right: 24),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Ponta Negra Center',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: PaletaCores.marrom,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      Text(
-                        'Av. Senador João Câmara, 160.',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: PaletaCores.marrom,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      Text(
-                        'Centro Parnamirim',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: PaletaCores.marrom,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
+        if (description3 != null) ...[
+          const SizedBox(
+            height: 20,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 187, 166, 150),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+              child: Text(
+                description3,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: PaletaCores.marrom,
+                  fontFamily: 'Poppins',
+                ),
+              ),
+            ),
+          ),
+        ],
+        if (buttonText != null && url != null) ...[
+          const SizedBox(
+            height: 20,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: PaletaCores.marrom,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+              child: GestureDetector(
+                onTap: () async {
+                  // ignore: deprecated_member_use
+                  if (await canLaunch(url)) {
+                    // ignore: deprecated_member_use
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+                child: Text(
+                  buttonText,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ],
     ),
   );

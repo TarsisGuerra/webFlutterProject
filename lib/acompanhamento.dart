@@ -104,9 +104,9 @@ Widget informativos(BuildContext context) {
               ? 2
               : 3,
       childAspectRatio: isMobile
-          ? 3 / 2
+          ? 2.7 / 2
           : isTablet
-              ? 2.9 / 2
+              ? 2.7 / 2
               : 3.2 / 2,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,

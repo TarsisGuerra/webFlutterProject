@@ -51,6 +51,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 600;
+    final isTablet = width >= 600 && width < 1300;
     return Scaffold(
       body: SingleChildScrollView(
         controller: _scrollController,
@@ -60,31 +63,52 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 60),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Image(
-                    image: AssetImage('assets/images/logoFim.png'),
-                    height: 60,
-                  ),
-                  Row(
-                    children: [
-                      _buildNavBarButton(
-                          'Home', () => _scrollToSection(_homeKey)),
-                      _buildNavBarButton('Acompanhamento',
-                          () => _scrollToSection(_acompanhamentoKey)),
-                      _buildNavBarButton(
-                          'Resultados', () => _scrollToSection(_resultadosKey)),
-                      _buildNavBarButton('Depoimentos',
-                          () => _scrollToSection(_depoimentosKey)),
-                      _buildNavBarButton(
-                          'Planos', () => _scrollToSection(_planosKey)),
-                      _buildNavBarButton('Atendimentos',
-                          () => _scrollToSection(_atendimentosKey)),
-                      _buildContactButton(),
-                    ],
-                  )
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: isMobile
+                        ? 20
+                        : isTablet
+                            ? 100
+                            : 150),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Image(
+                      image: AssetImage('assets/images/logoFim.png'),
+                      height: 60,
+                    ),
+                    isMobile
+                        ? IconButton(
+                            icon: const Icon(Icons.menu, color: Colors.white),
+                            onPressed: () {},
+                          )
+                        : isTablet
+                            ? IconButton(
+                                icon:
+                                    const Icon(Icons.menu, color: Colors.white),
+                                onPressed: () {},
+                              )
+                            : Row(
+                                children: [
+                                  _buildNavBarButton(
+                                      'Home', () => _scrollToSection(_homeKey)),
+                                  _buildNavBarButton(
+                                      'Acompanhamento',
+                                      () =>
+                                          _scrollToSection(_acompanhamentoKey)),
+                                  _buildNavBarButton('Resultados',
+                                      () => _scrollToSection(_resultadosKey)),
+                                  _buildNavBarButton('Depoimentos',
+                                      () => _scrollToSection(_depoimentosKey)),
+                                  _buildNavBarButton('Planos',
+                                      () => _scrollToSection(_planosKey)),
+                                  _buildNavBarButton('Atendimentos',
+                                      () => _scrollToSection(_atendimentosKey)),
+                                  _buildContactButton(),
+                                ],
+                              )
+                  ],
+                ),
               ),
               Initial(key: _homeKey),
               Acompanhamento(key: _acompanhamentoKey),
@@ -93,6 +117,9 @@ class _HomePageState extends State<HomePage> {
               Planos(key: _planosKey),
               Contato(key: _contatoKey),
               Atendimentos(key: _atendimentosKey),
+              const SizedBox(
+                height: 40,
+              ),
               const Foot(),
             ],
           ),
