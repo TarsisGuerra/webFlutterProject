@@ -161,24 +161,27 @@ Widget corpo1(BuildContext context) {
                 decoration: BoxDecoration(
                     color: PaletaCores.marrom,
                     borderRadius: BorderRadius.circular(30)),
-                child: GestureDetector(
-                  onTap: () async {
-                    const url = 'http://wa.me/5584987121596';
-                    // ignore: deprecated_member_use
-                    if (await canLaunch(url)) {
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () async {
+                      const url = 'http://wa.me/5584987121596';
                       // ignore: deprecated_member_use
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                  child: const Text(
-                    'Entre em Contato',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                        fontSize: 16,
-                        fontFamily: 'Poppins'),
+                      if (await canLaunch(url)) {
+                        // ignore: deprecated_member_use
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: const Text(
+                      'Entre em Contato',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 16,
+                          fontFamily: 'Poppins'),
+                    ),
                   ),
                 ),
               ),
@@ -215,41 +218,47 @@ Widget corpo1(BuildContext context) {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  GestureDetector(
-                    onTap: () async {
-                      const url =
-                          'https://www.instagram.com/pedrogoisnutri?igsh=bXpzMXp5b25tamQw&utm_source=qr';
-                      // ignore: deprecated_member_use
-                      if (await canLaunch(url)) {
+                  MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () async {
+                        const url =
+                            'https://www.instagram.com/pedrogoisnutri?igsh=bXpzMXp5b25tamQw&utm_source=qr';
                         // ignore: deprecated_member_use
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                    child: const Icon(
-                      SocialMediaIcons.instagram,
-                      color: PaletaCores.marrom,
+                        if (await canLaunch(url)) {
+                          // ignore: deprecated_member_use
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                      child: const Icon(
+                        SocialMediaIcons.instagram,
+                        color: PaletaCores.marrom,
+                      ),
                     ),
                   ),
                   const SizedBox(
                     width: 12,
                   ),
-                  GestureDetector(
-                    onTap: () async {
-                      const url =
-                          'https://linktr.ee/nutripedrogois?fbclid=PAZXh0bgNhZW0CMTEAAaY4bXXHaJOmsTw5HgHIHD6pSy2iopRveUnly1KszhjBrsRZt0daGXZ8lkc_aem_AZFLjA4tfgEq3-2x2FKMlYag9Hd8NAqApKnbHqhgTfE4MxH35SaF6Evie7DqMjsgGsNJD-aRZ3hXflCS5z_d_sYM';
-                      // ignore: deprecated_member_use
-                      if (await canLaunch(url)) {
+                  MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () async {
+                        const url =
+                            'https://linktr.ee/nutripedrogois?fbclid=PAZXh0bgNhZW0CMTEAAaY4bXXHaJOmsTw5HgHIHD6pSy2iopRveUnly1KszhjBrsRZt0daGXZ8lkc_aem_AZFLjA4tfgEq3-2x2FKMlYag9Hd8NAqApKnbHqhgTfE4MxH35SaF6Evie7DqMjsgGsNJD-aRZ3hXflCS5z_d_sYM';
                         // ignore: deprecated_member_use
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                    child: const Icon(
-                      SocialMediaIcons.linkedin,
-                      color: PaletaCores.marrom,
+                        if (await canLaunch(url)) {
+                          // ignore: deprecated_member_use
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                      child: const Icon(
+                        SocialMediaIcons.linkedin,
+                        color: PaletaCores.marrom,
+                      ),
                     ),
                   )
                 ],

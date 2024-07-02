@@ -380,16 +380,20 @@ class CardPlan extends StatelessWidget {
                     ],
                   ),
                 SizedBox(height: isMobile ? 22 : 48),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: PaletaCores.marrom,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 48),
-                    child: Text(
-                      'Quero esse!',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: PaletaCores.marrom,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 48),
+                      child: Text(
+                        'Quero esse!',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
                     ),
                   ),
                 )
@@ -630,16 +634,20 @@ class CardPlan2 extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: isMobile ? 32 : 48),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: PaletaCores.marrom,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 48),
-                    child: Text(
-                      'Quero esse!',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: PaletaCores.marrom,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 48),
+                      child: Text(
+                        'Quero esse!',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
                     ),
                   ),
                 )

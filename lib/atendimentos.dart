@@ -196,23 +196,26 @@ Widget atendimentoCard({
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-              child: GestureDetector(
-                onTap: () async {
-                  // ignore: deprecated_member_use
-                  if (await canLaunch(url)) {
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () async {
                     // ignore: deprecated_member_use
-                    await launch(url);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                },
-                child: Text(
-                  buttonText,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w300,
-                    fontFamily: 'Poppins',
+                    if (await canLaunch(url)) {
+                      // ignore: deprecated_member_use
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  child: Text(
+                    buttonText,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Poppins',
+                    ),
                   ),
                 ),
               ),

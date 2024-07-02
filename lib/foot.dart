@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pedro_site/useful/paleta.dart';
+import 'package:social_media_buttons/social_media_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Foot extends StatelessWidget {
@@ -150,9 +151,31 @@ Widget corpo2(bool isMobile) {
                     const SizedBox(
                       width: 16,
                     ),
-                    GestureDetector(
+                    MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                          onTap: () async {
+                            const url = 'http://wa.me/5584987121596';
+                            // ignore: deprecated_member_use
+                            if (await canLaunch(url)) {
+                              // ignore: deprecated_member_use
+                              await launch(url);
+                            } else {
+                              throw 'Could not launch $url';
+                            }
+                          },
+                          child: const Card(
+                              icone: Icons.phone, texto: '(84) 98712-1596')),
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
                         onTap: () async {
-                          const url = 'http://wa.me/5584987121596';
+                          const url =
+                              'https://www.instagram.com/pedrogoisnutri?igsh=bXpzMXp5b25tamQw&utm_source=qr';
                           // ignore: deprecated_member_use
                           if (await canLaunch(url)) {
                             // ignore: deprecated_member_use
@@ -162,11 +185,10 @@ Widget corpo2(bool isMobile) {
                           }
                         },
                         child: const Card(
-                            icone: Icons.phone, texto: '(84) 98712-1596')),
-                    const SizedBox(
-                      width: 16,
+                            icone: SocialMediaIcons.instagram,
+                            texto: 'Pedro Góis'),
+                      ),
                     ),
-                    const Card(icone: Icons.location_on, texto: 'Endereços'),
                     const SizedBox(
                       width: 16,
                     ),

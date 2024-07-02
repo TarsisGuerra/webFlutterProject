@@ -189,24 +189,27 @@ Widget corpo1(BuildContext context) {
                   color: PaletaCores.marrom,
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: GestureDetector(
-                  onTap: () async {
-                    const url = 'http://wa.me/5584987121596';
-                    // ignore: deprecated_member_use
-                    if (await canLaunch(url)) {
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () async {
+                      const url = 'http://wa.me/5584987121596';
                       // ignore: deprecated_member_use
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                  child: const Text(
-                    'Comece agora!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
+                      if (await canLaunch(url)) {
+                        // ignore: deprecated_member_use
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: const Text(
+                      'Comece agora!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                      ),
                     ),
                   ),
                 ),
